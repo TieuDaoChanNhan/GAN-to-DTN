@@ -11,7 +11,7 @@ Goals:
 - Study the paper Unsupervised Cross-Domain Image Generation (DTN) to tackle image-to-image translation without paired data.
 - Deploy the DTN model on Hugging Face Spaces with a Gradio demo interface.
 
-🔗 Hugging Face Demo: DTN-Demo-v1
+🔗 Hugging Face Demo: [DTN-Demo-v1](https://huggingface.co/spaces/TieuDaoChanNhan/DTN-Demo-v1)
 
 ## 📂 Repository Structure
 
