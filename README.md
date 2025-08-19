@@ -58,7 +58,7 @@ Loss Functions:
 
 - Training with PyTorch + tracking via Weights \& Biases (wandb): monitor losses and generated images across epochs.
 - Packaged as a Gradio demo and deployed on Hugging Face Spaces:
-    - 👉 DTN-Demo-v1
+    - 👉 [DTN-Demo-v1](https://huggingface.co/spaces/TieuDaoChanNhan/DTN-Demo-v1)
 
 
 ## 📚 References
