@@ -1,67 +1,67 @@
 # 🎨 Generative Adversarial Networks \& Domain Transfer Network
 
-## 📌 Giới thiệu
+## 📌 Introduction
 
-Repo này là hành trình từ reproduce paper GAN (Goodfellow et al., 2014) đến triển khai và nghiên cứu các biến thể nâng cao như DCGAN, WGAN-GP, và cuối cùng là Domain Transfer Network (DTN, Taigman et al., 2017).
+This repository documents a journey from reproducing the original GAN paper (Goodfellow et al., 2014) to implementing and studying advanced variants such as DCGAN, WGAN-GP, and finally the Domain Transfer Network (DTN, Taigman et al., 2017).
 
-Mục tiêu:
+Goals:
 
-- Hiểu rõ cơ chế GAN và các vấn đề như vanishing gradient và mode collapse.
-- Áp dụng cải tiến với DCGAN và WGAN-GP để cải thiện chất lượng sinh ảnh.
-- Nghiên cứu paper Unsupervised Cross-Domain Image Generation (DTN) để giải quyết bài toán image-to-image translation mà không cần dữ liệu paired.
-- Triển khai mô hình DTN trên Hugging Face Spaces với giao diện demo qua Gradio.
+- Understand the mechanics of GANs and issues like vanishing gradient and mode collapse.
+- Apply improvements with DCGAN and WGAN-GP to enhance image generation quality.
+- Study the paper Unsupervised Cross-Domain Image Generation (DTN) to tackle image-to-image translation without paired data.
+- Deploy the DTN model on Hugging Face Spaces with a Gradio demo interface.
 
-🔗 Demo Hugging Face: [DTN-Demo-v1](https://huggingface.co/spaces/TieuDaoChanNhan/DTN-Demo-v1)
+🔗 Hugging Face Demo: DTN-Demo-v1
 
-## 📂 Cấu trúc Repo
+## 📂 Repository Structure
 
-- DCGAN with CelebA.ipynb → Triển khai DCGAN trên dataset CelebA để sinh ảnh khuôn mặt.
-- WGAN GP with CelebA.ipynb → Thử nghiệm WGAN-GP với CelebA, cải thiện ổn định training và giảm mode collapse.
-- DTN with Dataset.ipynb → Triển khai Domain Transfer Network từ CelebA-HQ (resize) → Bitmoji, huấn luyện và đóng gói demo Gradio.
-- Slide Report.pdf → Báo cáo chi tiết:
-    - Toán học đằng sau GAN và Jensen–Shannon Divergence.
-    - Các vấn đề vanishing gradient và mode collapse.
-    - Cách WGAN/WGAN-GP cải tiến.
-    - Phân tích paper DTN và cách áp dụng.
+- DCGAN with CelebA.ipynb → Implement DCGAN on the CelebA dataset for face generation.
+- WGAN GP with CelebA.ipynb → Experiment with WGAN-GP on CelebA to improve training stability and reduce mode collapse.
+- DTN with Dataset.ipynb → Implement the Domain Transfer Network from CelebA-HQ (resized) → Bitmoji, train, and package a Gradio demo.
+- Slide Report.pdf → Detailed report:
+    - Mathematics behind GANs and the Jensen–Shannon Divergence.
+    - Issues of vanishing gradient and mode collapse.
+    - How WGAN/WGAN-GP improve training.
+    - Analysis of the DTN paper and practical application.
 
 
-## 📖 GAN \& Các biến thể
+## 📖 GANs \& Variants
 
-- GAN: Mô hình gồm Generator và Discriminator cạnh tranh, tối ưu hàm mục tiêu liên quan đến Jensen–Shannon Divergence.
-- DCGAN: Sử dụng Conv/Deconv layers, BatchNorm để cải thiện training stability.
-- WGAN-GP: Dùng Wasserstein Distance + Gradient Penalty, giúp:
-    - Tránh vanishing gradient.
-    - Giảm mode collapse.
-- Target domain của các thí nghiệm GAN: CelebA dataset.
+- GAN: A framework with a Generator and a Discriminator in competition, optimizing an objective related to the Jensen–Shannon Divergence.
+- DCGAN: Uses Conv/Deconv layers and BatchNorm to improve training stability.
+- WGAN-GP: Uses the Wasserstein Distance with Gradient Penalty, which:
+    - Avoids vanishing gradients.
+    - Reduces mode collapse.
+- Target domain in GAN experiments: CelebA dataset.
 
 
 ## 📖 Domain Transfer Network (DTN)
 
 - Paper: Unsupervised Cross-Domain Image Generation (Taigman et al., 2017).
-- Bài toán: Transfer ảnh từ domain nguồn (CelebA-HQ) → domain đích (Bitmoji), bảo toàn identity mà không cần dữ liệu paired.
+- Problem: Transfer images from a source domain (CelebA-HQ) to a target domain (Bitmoji), preserving identity without paired data.
 
-Kiến trúc:
+Architecture:
 
-- f: Pre-trained feature extractor (FaceNet) để giữ đặc trưng.
-- g: Generator mapping feature → target domain.
-- D: Ternary Discriminator (phân biệt real target / fake source / fake target).
+- f: Pre-trained feature extractor (FaceNet) to preserve identity features.
+- g: Generator that maps features to the target domain.
+- D: Ternary Discriminator (distinguishes real target / fake source / fake target).
 
-Loss Function:
+Loss Functions:
 
-- LGAN: đảm bảo ảnh sinh ra thuộc target domain.
-- LCONST: bảo toàn identity (quan trọng nhất).
-- LTID: giữ consistency trong target domain.
-- LTV: regularization, làm ảnh mượt hơn.
-
-
-## 🚀 Triển khai \& Demo
-
-- Training với PyTorch + tracking bằng Weights \& Biases (wandb): theo dõi loss và ảnh sinh ra qua từng epoch.
-- Gói demo bằng Gradio, triển khai trên Hugging Face Spaces:
-    - 👉 [DTN-Demo-v1](https://huggingface.co/spaces/TieuDaoChanNhan/DTN-Demo-v1)
+- LGAN: Ensures generated images belong to the target domain.
+- LCONST: Preserves identity (the most important term).
+- LTID: Maintains consistency within the target domain.
+- LTV: Regularization for smoother images.
 
 
-## 📚 Tham khảo
+## 🚀 Implementation \& Demo
+
+- Training with PyTorch + tracking via Weights \& Biases (wandb): monitor losses and generated images across epochs.
+- Packaged as a Gradio demo and deployed on Hugging Face Spaces:
+    - 👉 DTN-Demo-v1
+
+
+## 📚 References
 
 - Goodfellow et al. (2014), Generative Adversarial Nets.
 - Radford et al. (2015), DCGAN.
@@ -70,5 +70,4 @@ Loss Function:
 
 ***
 
-✍️ Repo được phát triển trong khuôn khổ nghiên cứu Toán học trong các Mô hình Tạo sinh (PiMA 2025).
-
+✍️ This repository was developed as part of the study Mathematics in Generative Models (PiMA 2025).
